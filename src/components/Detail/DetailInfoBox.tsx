@@ -12,6 +12,7 @@ import {Cast} from "../../models/cast";
 import {CastItemWrapper} from "../CastItem/CastItem.style";
 import {Schedule} from "../../models/schedule";
 import TimeItem from "../TimeItem/TimeItem";
+import {isSet} from "util/types";
 
 function DetailInfoBox() {
     const [date, setDate] = useState(new Date())
@@ -60,7 +61,8 @@ function DetailInfoBox() {
 
 
     useEffect(function () {
-        if (schedules.length > 0) {
+        console.log("schedules", schedules)
+        if (schedules.length) {
             const [year, month, date] = schedules[0].date.split("-")
             setDate(new Date(Number(year), Number(month)-1, Number(date)))
         }
