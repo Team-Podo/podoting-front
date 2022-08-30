@@ -4,8 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from "axios";
+import {SERVER_URL} from "./constants/url";
 
-axios.defaults.withCredentials = true
+axios.defaults.baseURL = SERVER_URL;
+/** @description for refreshToken */
+axios.defaults.withCredentials = true;
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
