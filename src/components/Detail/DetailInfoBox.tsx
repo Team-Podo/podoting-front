@@ -6,17 +6,16 @@ import Calendar, {CalendarTileProperties} from "react-calendar"
 import React, {useEffect, useState} from "react";
 import moment from "moment";
 import {getDetails} from "../../apis/detail";
-import {Detail} from "../../models/detail";
+import {Content, Detail} from "../../models/detail";
 import CastItem from "../CastItem/CastItem";
 import {Cast} from "../../models/cast";
 import {CastItemWrapper} from "../CastItem/CastItem.style";
 import {Schedule} from "../../models/schedule";
 import TimeItem from "../TimeItem/TimeItem";
-import {isSet} from "util/types";
 
 function DetailInfoBox() {
     const [date, setDate] = useState(new Date())
-    const [contents, setContents] = useState(<div>컨텐츠 추후 수정 예정.. 무시바랍니다</div>)
+    const [contents, setContents] = useState<Content[]>()
     const [details, setDetails] = useState<Detail>()
     const [casts, setCasts] = useState<Cast[]>([])
     const [schedules, setSchedules] = useState<Schedule[]>([])
@@ -27,22 +26,11 @@ function DetailInfoBox() {
             setDetails(res)
             setCasts(res.cast)
             setSchedules(res.schedules)
+            setContents(res.contents)
         } ).catch((e) => console.log(e))
 
         function getContents() {
-            const texts = <div className="content-inner">
-                <h3>소제목</h3>
-                [인터파크] 뮤지컬 팬레터 3/16(수) 4시 공연 취소 및 환불 안내<br/>
 
-                안녕하세요. 뮤지컬 팬레터입니다.<br/><br/>
-
-                    금일 출연진의 자가키트 양성 확인으로 인해<br/>
-                    3/16(수) 4시 공연을 취소 하였습니다.<br/>
-                    소중한 시간 내주시어 발걸음 해주신 모든 관객 여러분들께<br/>
-                    불편을 드려 진심으로 죄송합니다.<br/><br/>
-
-                    예매 건은 모두 일괄적으로 취소 및 전액 환불 예정입니다.<br/>
-            </div>
             const imgs = [contentImageSrc1, contentImageSrc2, contentImageSrc3].map((item, idx)=> {
                 return <div className="content-inner" key={idx}>
                     <h3>소제목</h3>
@@ -51,17 +39,14 @@ function DetailInfoBox() {
             })
 
             return <div>
-                {texts}
                 {imgs}
             </div>
 
         }
-        setContents(getContents())
     }, [])
 
 
     useEffect(function () {
-        console.log("schedules", schedules)
         if (schedules.length) {
             const [year, month, date] = schedules[0].date.split("-")
             setDate(new Date(Number(year), Number(month)-1, Number(date)))
@@ -101,15 +86,15 @@ function DetailInfoBox() {
                     </div>
                     <div className="info-left-detail">
                         <span>장소</span>
-                        <div>장소추가바람~</div>
+                        <div>{ details && details.place.name }</div>
                     </div>
                     <div className="info-left-detail">
                         <span>관람시간</span>
-                        <div>관람시간안넘어와요</div>
+                        <div>{ details && details.runningTime }</div>
                     </div>
                     <div className="info-left-detail">
                         <span>관람등급</span>
-                        <div>관람등급을넣어주세요</div>
+                        <div>{ details && details.rating }</div>
                     </div>
                     <div className="info-left-detail">
                         <span>가격</span>
@@ -150,7 +135,14 @@ function DetailInfoBox() {
                 <CastItemWrapper>
                     { casts && casts.map((i) => <CastItem name={i.name} profile={i.profile} role={i.role} key={i.id} />) }
                 </CastItemWrapper>
-                {contents}
+                <div className="content">
+                    { contents?.map((i) => {
+                        return <div className="content-inner">
+                            <h3>{i.title}</h3>
+                            <div dangerouslySetInnerHTML={ {__html: i.content} }></div>
+                        </div>
+                    })}
+                </div>
             </div>
         </div>
     </DetailWrapper>

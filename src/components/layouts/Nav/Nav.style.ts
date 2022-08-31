@@ -29,4 +29,10 @@ export const NavContentWrapper = styled.div`
   border-bottom: 1px solid #d1cfd1;
   min-height: 5rem;
   box-shadow: 0px 4px 8px rgb(0 0 0 / 6%);
+  
+  .logo {
+    height: 3rem;
+    margin: 1rem;
+  }
+  
 `

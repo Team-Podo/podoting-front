@@ -1,5 +1,7 @@
 import { NavWrapper, NavContentWrapper } from "./Nav.style";
 import {useEffect, useState} from "react";
+import logoImg from "../../../assets/images/podoting_logo.jpg"
+import {Link} from "react-router-dom";
 
 
 function Nav() {
@@ -29,7 +31,9 @@ function Nav() {
             </div>
             <NavContentWrapper>
                 <div className='nav-inner'>
-                    <span>로고</span>
+                    <Link to="/">
+                        <img src={logoImg} alt="logo" className="logo"/>
+                    </Link>
                 </div>
             </NavContentWrapper>
         </NavWrapper>
