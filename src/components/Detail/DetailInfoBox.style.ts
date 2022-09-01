@@ -88,11 +88,13 @@ export const DetailWrapper = styled.div`
   }
 
   .reservation-details .time{
-    border: 2px solid #764abc;
+    border: 2px solid #e5e5e5;
     border-radius: 10px;
     padding: 0.4rem;
     flex: 1 1 40%;
+    cursor: pointer;
   }
+
   .reservation-details .time:nth-child(odd) {
     margin-right: 5px;
   }
@@ -103,6 +105,11 @@ export const DetailWrapper = styled.div`
 
   .reservation-details .time>p{
     font-size: 13px;
+  }
+
+  .reservation-details .time.active {
+    background-color: #e6d7e9;
+    border: 2px solid #764abc;
   }
 
   .reservation-button {

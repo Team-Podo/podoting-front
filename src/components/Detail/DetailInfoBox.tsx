@@ -8,8 +8,8 @@ import CastItem from "../CastItem/CastItem";
 import {Cast} from "../../models/cast";
 import {CastItemWrapper} from "../CastItem/CastItem.style";
 import {Schedule} from "../../models/schedule";
-import TimeItem from "../TimeItem/TimeItem";
 import {useParams} from "react-router-dom";
+import TimeItem from "../TimeItem/TimeItem";
 
 function DetailInfoBox() {
     const {id} = useParams()
@@ -19,15 +19,17 @@ function DetailInfoBox() {
     const [casts, setCasts] = useState<Cast[]>([])
     const [schedules, setSchedules] = useState<Schedule[]>([])
     const [times, setTimes] = useState<Schedule[]>([])
+    const [isActive, setIsActive] = useState("")
 
     useEffect(function () {
+        localStorage.removeItem("reservationProps")
         getDetails(Number(id)).then((res) => {
             setDetails(res)
             setCasts(res.cast)
             setSchedules(res.schedules)
             setContents(res.contents)
         }).catch((e) => console.log(e))
-    }, [])
+    }, [id])
 
 
     useEffect(function () {
@@ -42,7 +44,10 @@ function DetailInfoBox() {
             return i.date === moment(date).format("YYYY-MM-DD")
         })
         setTimes(times)
-    }, [date])
+        if(times.length>0){
+            setIsActive(times[0].uuid)
+        }
+    }, [schedules, date])
 
     function isTileDisabled(e: CalendarTileProperties) {
         if (schedules) {
@@ -52,6 +57,16 @@ function DetailInfoBox() {
         } else {
             return true
         }
+    }
+
+    function onClickPrint(e: React.MouseEvent<HTMLButtonElement>) {
+        e.preventDefault()
+        const reservationProps = {
+            performanceId: id,
+            timeUuid: isActive
+        }
+        localStorage.setItem("reservationProps", JSON.stringify(reservationProps))
+        window.open("/res", "popupname",'width=1028,height=700,location=no,status=no,scrollbars=yes')
     }
 
     return <DetailWrapper>
@@ -100,9 +115,9 @@ function DetailInfoBox() {
                     <p><span>Step 2.</span> 회차 선택</p>
                     <p>{moment(date).format("YYYY년 MM월 DD일")}</p>
                     <div className="reservation-details">
-                        {times && times.map((i) => <TimeItem key={i.uuid} id={i.uuid} time={i.time} cast={i.cast}/>)}
+                        {times && times.map((i) => <TimeItem isActive={isActive===i.uuid} onClick={setIsActive} key={i.uuid} uuid={i.uuid} time={i.time} cast={i.cast}/>)}
                     </div>
-                    <button className="reservation-button">예매하기</button>
+                    <button className="reservation-button" onClick={onClickPrint}>예매하기</button>
                 </div>
             </div>
         </div>
