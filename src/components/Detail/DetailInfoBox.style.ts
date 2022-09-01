@@ -18,6 +18,7 @@ export const DetailWrapper = styled.div`
     padding: 10px;
     width: 25rem;
     display: inline-block;
+    height: 30rem;
   }
 
   .info-left-img-box img {

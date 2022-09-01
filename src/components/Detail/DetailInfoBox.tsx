@@ -1,6 +1,3 @@
-import contentImageSrc1 from "../../assets/images/contentsample1.jpg"
-import contentImageSrc2 from "../../assets/images/contentsample2.jpg"
-import contentImageSrc3 from "../../assets/images/contentsample3.jpg"
 import {ContentTitlesWrapper, DetailWrapper} from "./DetailInfoBox.style"
 import Calendar, {CalendarTileProperties} from "react-calendar"
 import React, {useEffect, useState} from "react";
@@ -12,8 +9,10 @@ import {Cast} from "../../models/cast";
 import {CastItemWrapper} from "../CastItem/CastItem.style";
 import {Schedule} from "../../models/schedule";
 import TimeItem from "../TimeItem/TimeItem";
+import {useParams} from "react-router-dom";
 
 function DetailInfoBox() {
+    const {id} = useParams()
     const [date, setDate] = useState(new Date())
     const [contents, setContents] = useState<Content[]>()
     const [details, setDetails] = useState<Detail>()
@@ -22,34 +21,19 @@ function DetailInfoBox() {
     const [times, setTimes] = useState<Schedule[]>([])
 
     useEffect(function () {
-        getDetails(11).then((res) => {
+        getDetails(Number(id)).then((res) => {
             setDetails(res)
             setCasts(res.cast)
             setSchedules(res.schedules)
             setContents(res.contents)
-        } ).catch((e) => console.log(e))
-
-        function getContents() {
-
-            const imgs = [contentImageSrc1, contentImageSrc2, contentImageSrc3].map((item, idx)=> {
-                return <div className="content-inner" key={idx}>
-                    <h3>소제목</h3>
-                    <img src={item} alt="컨텐츠 이미지"/>
-                </div>
-            })
-
-            return <div>
-                {imgs}
-            </div>
-
-        }
+        }).catch((e) => console.log(e))
     }, [])
 
 
     useEffect(function () {
         if (schedules.length) {
             const [year, month, date] = schedules[0].date.split("-")
-            setDate(new Date(Number(year), Number(month)-1, Number(date)))
+            setDate(new Date(Number(year), Number(month) - 1, Number(date)))
         }
     }, [schedules])
 
@@ -60,7 +44,7 @@ function DetailInfoBox() {
         setTimes(times)
     }, [date])
 
-    function isTileDisabled(e:CalendarTileProperties) {
+    function isTileDisabled(e: CalendarTileProperties) {
         if (schedules) {
             const scheduleDateList = schedules.map((i) => i.date)
             const date = moment(e.date).format("YYYY-MM-DD")
@@ -74,37 +58,37 @@ function DetailInfoBox() {
         <div className="info common-section">
             <div className="wrapper">
                 <div className="info-left">
-                <div className="info-left-img-box">
-                    <img src={ details && (details.thumbUrl) } alt="poster_image"/>
-                </div>
-                <div className="info-left-detail-box">
-                    <p id="title">{ details && details.title }</p>
-                    <div className="border"></div>
-                    <div className="info-left-detail">
-                        <span>기간</span>
-                        <div>{ details && details.startDate } ~ { details && details.endDate }</div>
+                    <div className="info-left-img-box">
+                        <img src={details && (details.thumbUrl)} alt="poster_image"/>
                     </div>
-                    <div className="info-left-detail">
-                        <span>장소</span>
-                        <div>{ details && details.place.name }</div>
-                    </div>
-                    <div className="info-left-detail">
-                        <span>관람시간</span>
-                        <div>{ details && details.runningTime }</div>
-                    </div>
-                    <div className="info-left-detail">
-                        <span>관람등급</span>
-                        <div>{ details && details.rating }</div>
-                    </div>
-                    <div className="info-left-detail">
-                        <span>가격</span>
-                        <div>
-                            <p>VIP: 150000</p>
-                            <p>R: 130000</p>
+                    <div className="info-left-detail-box">
+                        <p id="title">{details && details.title}</p>
+                        <div className="border"></div>
+                        <div className="info-left-detail">
+                            <span>기간</span>
+                            <div>{details && details.startDate} ~ {details && details.endDate}</div>
+                        </div>
+                        <div className="info-left-detail">
+                            <span>장소</span>
+                            <div>{details && details.place.name}</div>
+                        </div>
+                        <div className="info-left-detail">
+                            <span>관람시간</span>
+                            <div>{details && details.runningTime}</div>
+                        </div>
+                        <div className="info-left-detail">
+                            <span>관람등급</span>
+                            <div>{details && details.rating}</div>
+                        </div>
+                        <div className="info-left-detail">
+                            <span>가격</span>
+                            <div>
+                                <p>VIP: 150000</p>
+                                <p>R: 130000</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
                 <div className="reservation-box">
                     <p><span>Step 1.</span> 날짜 선택</p>
                     <Calendar
@@ -116,7 +100,7 @@ function DetailInfoBox() {
                     <p><span>Step 2.</span> 회차 선택</p>
                     <p>{moment(date).format("YYYY년 MM월 DD일")}</p>
                     <div className="reservation-details">
-                        { times && times.map((i) => <TimeItem key={i.uuid} id={i.uuid} time={i.time} cast={i.cast}/>) }
+                        {times && times.map((i) => <TimeItem key={i.uuid} id={i.uuid} time={i.time} cast={i.cast}/>)}
                     </div>
                     <button className="reservation-button">예매하기</button>
                 </div>
@@ -133,13 +117,13 @@ function DetailInfoBox() {
                     </ul>
                 </ContentTitlesWrapper>
                 <CastItemWrapper>
-                    { casts && casts.map((i) => <CastItem name={i.name} profile={i.profile} role={i.role} key={i.id} />) }
+                    {casts && casts.map((i) => <CastItem name={i.name} profile={i.profile} role={i.role} key={i.id}/>)}
                 </CastItemWrapper>
                 <div className="content">
-                    { contents?.map((i) => {
-                        return <div className="content-inner">
+                    {contents?.map((i) => {
+                        return <div className="content-inner" key={i.uuid}>
                             <h3>{i.title}</h3>
-                            <div dangerouslySetInnerHTML={ {__html: i.content} }></div>
+                            <div dangerouslySetInnerHTML={{__html: i.content}}></div>
                         </div>
                     })}
                 </div>
