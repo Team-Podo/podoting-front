@@ -22,7 +22,6 @@ function DetailInfoBox() {
     const [isActive, setIsActive] = useState("")
 
     useEffect(function () {
-        localStorage.removeItem("reservationProps")
         getDetails(Number(id)).then((res) => {
             setDetails(res)
             setCasts(res.cast)
@@ -117,7 +116,7 @@ function DetailInfoBox() {
                     <div className="reservation-details">
                         {times && times.map((i) => <TimeItem isActive={isActive===i.uuid} onClick={setIsActive} key={i.uuid} uuid={i.uuid} time={i.time} cast={i.cast}/>)}
                     </div>
-                    <button className="reservation-button" onClick={onClickPrint}>예매하기</button>
+                    <button className="button" onClick={onClickPrint}>예매하기</button>
                 </div>
             </div>
         </div>

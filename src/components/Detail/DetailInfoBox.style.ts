@@ -112,16 +112,6 @@ export const DetailWrapper = styled.div`
     border: 2px solid #764abc;
   }
 
-  .reservation-button {
-    padding: 1rem;
-    width: 100%;
-    border: none;
-    background-color: #764abc;
-    border-radius: 10px;
-    color: #fff;
-    font-weight: bold;
-  }
-
   .content {
     min-height: 3000px;
     width: 55rem;
