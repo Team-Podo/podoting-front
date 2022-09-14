@@ -7,34 +7,38 @@ import {getSeats} from "../../apis/seat";
 
 function ReservationPage() {
     const [id, setId] = useState()
+    const [seatImg, setSeatImg] = useState<string>("")
     const [seats, setSeats] = useState<Seat[]>([])
-    const [data, setData] = useState<string>()
     const [selectedSeats, setSelectedSeats] = useState<Seat[]>([])
     const [total, setTotal] = useState(0)
     const reservationProps = JSON.parse(localStorage.getItem("reservationProps") || "")
 
     useEffect(function () {
-        const getSeatData = getSeats()
-        setData(getSeatData.backgroundImage.url)
+        getSeats().then((s) => {
+            setSeatImg(s.backgroundImage)
+            setSeats(s.seats)
+        })
         setId(reservationProps.performanceId)
-        setSeats(getSeatData.seats)
     }, [reservationProps.performanceId])
 
     function addSelectedSeats (id:string) {
         console.log(selectedSeats)
-        if (selectedSeats.filter((item) => item.uuid === id).length > 0) {
+        const seatIsAlreadyAdded = selectedSeats.filter((item) => item.uuid === id)
+        if (seatIsAlreadyAdded.length > 0) {
             setSelectedSeats([...selectedSeats.filter((i) => i.uuid !== id)])
+            setTotal((curr) => curr -= seatIsAlreadyAdded[0].price)
         } else {
             const findSeatData = seats.filter((i) => i.uuid === id)[0]
             setSelectedSeats([...selectedSeats, findSeatData])
+            setTotal((curr) => curr += findSeatData.price)
         }
     }
 
     return <ReservationPageWrapper>
         <div className="seat-map-wrapper">
             <div className="seat-map-img-container">
-                <img className="seat-map" src={data} alt="seat"/>
-                {seats && seats.map((i) =>  <SeatItem key={i.uuid} uuid={i.uuid} point={i.point} name={i.name} grade={i.grade} selected={addSelectedSeats}/>)}
+                <img className="seat-map" src={seatImg} alt="seat"/>
+                {seats && seats.map((i) =>  <SeatItem key={i.uuid} uuid={i.uuid} point={i.point} color={i.color} selected={addSelectedSeats}/>)}
             </div>
         </div>
         <div className="reservation-data-wrapper">
@@ -61,7 +65,7 @@ function ReservationPage() {
             <div className="selected-seat-data">
                 <div className="selected-seat-list">
                 { selectedSeats.length > 0 ? selectedSeats.map((i) =>
-                    <div>{i.name} {i.grade.name}</div>) : <div>선택된 좌석이 없습니다</div>}
+                    <div key={i.uuid}>{i.name} {i.grade.name}</div>) : <div>선택된 좌석이 없습니다</div>}
                 </div>
                 <div className="total">
                     총 결제금액: {total}

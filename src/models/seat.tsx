@@ -8,5 +8,7 @@ export interface Seat {
     grade: {
         id: number,
         name: string
-    }
+    },
+    price: number,
+    color: string
 }
