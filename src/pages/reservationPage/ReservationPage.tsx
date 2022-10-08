@@ -4,7 +4,6 @@ import {Seat} from "../../models/seat";
 import SeatItem from "../../components/SeatItem/SeatItem";
 import {getSeats} from "../../apis/seat";
 import {Detail} from "../../models/detail";
-import {Schedule} from "../../models/schedule";
 import moment from "moment";
 
 function ReservationPage() {
@@ -21,6 +20,9 @@ function ReservationPage() {
         setPerformanceID(reservationProps.performanceId)
         setScheduleUUID(reservationProps.scheduleUUID)
         setDetails(reservationProps.details)
+    }, [])
+
+    useEffect(function () {
         refreshScheduleSeats()
     }, [scheduleUUID])
 
@@ -33,6 +35,7 @@ function ReservationPage() {
             setSeatImg(s.backgroundImage)
             setSeats(s.seats)
         })
+        console.log(scheduleUUID)
     }
 
     function addSelectedSeats(id: string) {
@@ -79,8 +82,8 @@ function ReservationPage() {
 
             <div className="change-reservation-date">
                 <p>예매일자 변경</p>
-                <select onChange={(e) => setScheduleUUID(e.currentTarget.value)}>
-                    {details && details.schedules.map((sch) => <option value={sch.uuid} key={sch.uuid} selected={scheduleUUID===sch.uuid}>{moment(sch.date).format("YYYY년 MM월 DD일")} {sch.time}</option>)}
+                <select onChange={(e)=>setScheduleUUID(e.currentTarget.value)}>
+                    {details && details.schedules.map((sch) => <option value={sch.uuid} key={sch.uuid}>{moment(sch.date).format("YYYY년 MM월 DD일")} {sch.time}</option>)}
                 </select>
             </div>
             <div className="selected-seat-data">
