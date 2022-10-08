@@ -3,13 +3,13 @@ import styled from "styled-components";
 export const SeatItemWrapper = styled.div<{x:number, y:number, color:string}>`{
   
   div {
-    width: 9.3px;
-    height: 9.3px;
+    width: 8px;
+    height: 8px;
     background-color: ${props => props.color};
     position: absolute;
     cursor: pointer;
-    top: ${props => props.x}px;
-    left: ${props => props.y}px;
+    top: ${props => props.y}px;
+    left: ${props => props.x}px;
   }
   
   div.selected {

@@ -19,7 +19,7 @@ function DetailInfoBox() {
     const [casts, setCasts] = useState<Cast[]>([])
     const [schedules, setSchedules] = useState<Schedule[]>([])
     const [times, setTimes] = useState<Schedule[]>([])
-    const [isActive, setIsActive] = useState("")
+    const [activeScheduleUUID, setActiveScheduleUUID] = useState("")
 
     useEffect(function () {
         getDetails(Number(id)).then((res) => {
@@ -43,8 +43,8 @@ function DetailInfoBox() {
             return i.date === moment(date).format("YYYY-MM-DD")
         })
         setTimes(times)
-        if(times.length>0){
-            setIsActive(times[0].uuid)
+        if (times.length > 0) {
+            setActiveScheduleUUID(times[0].uuid)
         }
     }, [schedules, date])
 
@@ -58,14 +58,15 @@ function DetailInfoBox() {
         }
     }
 
-    function onClickPrint(e: React.MouseEvent<HTMLButtonElement>) {
+    function onClickOpenResWindow(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault()
         const reservationProps = {
             performanceId: id,
-            timeUuid: isActive
+            scheduleUUID: activeScheduleUUID,
+            details: details
         }
         localStorage.setItem("reservationProps", JSON.stringify(reservationProps))
-        window.open("/res", "popupname",'width=1028,height=700,location=no,status=no,scrollbars=yes')
+        window.open("/res", "popupname", 'width=1028,height=620,location=no,status=no,scrollbars=yes')
     }
 
     return <DetailWrapper>
@@ -97,8 +98,7 @@ function DetailInfoBox() {
                         <div className="info-left-detail">
                             <span>가격</span>
                             <div>
-                                <p>VIP: 150000</p>
-                                <p>R: 130000</p>
+                                {details && details.seatGrades.map((g) => <p key={g.id}>{g.name}: {g.price}</p>)}
                             </div>
                         </div>
                     </div>
@@ -114,9 +114,11 @@ function DetailInfoBox() {
                     <p><span>Step 2.</span> 회차 선택</p>
                     <p>{moment(date).format("YYYY년 MM월 DD일")}</p>
                     <div className="reservation-details">
-                        {times && times.map((i) => <TimeItem isActive={isActive===i.uuid} onClick={setIsActive} key={i.uuid} uuid={i.uuid} time={i.time} cast={i.cast}/>)}
+                        {times && times.map((i) => <TimeItem isActive={activeScheduleUUID === i.uuid}
+                                                             onClick={setActiveScheduleUUID} key={i.uuid} uuid={i.uuid}
+                                                             time={i.time} cast={i.cast ?? null}/>)}
                     </div>
-                    <button className="button" onClick={onClickPrint}>예매하기</button>
+                    <button className="button" onClick={onClickOpenResWindow}>예매하기</button>
                 </div>
             </div>
         </div>

@@ -1,4 +1,3 @@
-import {Seat} from "../../models/seat";
 import {SeatItemWrapper} from "./SeatItem.style";
 import {useState} from "react";
 
@@ -20,11 +19,9 @@ function SeatItem({uuid, point, color, selected} :SeatProps) {
         setIsSelected((curr) => !curr)
         selected(uuid)
     }
-    return <div onClick={onClickSeat}>
-        <SeatItemWrapper x={x} y={y} color={color} >
+    return <SeatItemWrapper x={x} y={y} color={color} onClick={onClickSeat}>
             <div className={ isSelected ? "selected" : ""}> </div>
         </SeatItemWrapper>
-    </div>
 }
 
 export default SeatItem

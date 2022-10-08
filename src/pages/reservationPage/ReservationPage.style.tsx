@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 export const ReservationPageWrapper = styled.div`{
   width: 1028px;
-  height: 700px;
+  height: 620px;
   overflow: scroll;
   position: relative;
   display: -webkit-inline-flex;
 
   .seat-map-wrapper {
-    width: 70%;
-    height: 100%;
+    width: 660px;
+    height: 620px;
     background-color: lightgray;
     object-fit: cover;
   }
@@ -61,6 +61,7 @@ export const ReservationPageWrapper = styled.div`{
   .selected-seat-data>.selected-seat-list {
     padding: 10px;
     flex: 5;
+    overflow: scroll;
   }
   .selected-seat-data>.total {
     padding: 10px;

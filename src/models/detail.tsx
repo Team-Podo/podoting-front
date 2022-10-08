@@ -23,4 +23,9 @@ export interface Detail {
     schedules: Schedule[],
     cast: Cast[]
     contents: Content[]
+    seatGrades: {
+        id: string
+        name:string
+        price: number
+    }[]
 }

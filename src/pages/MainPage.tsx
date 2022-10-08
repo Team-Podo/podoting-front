@@ -38,7 +38,7 @@ export const MainPageStyle = styled.div`{
 function MainPage() {
     return <MainPageStyle>
         <img src={logoImg} alt="logo" className="logo"/>
-        <Link to="/musical/11">
+        <Link to="/musical/1">
             <button>ENTER PODOTING</button>
         </Link>
     </MainPageStyle>

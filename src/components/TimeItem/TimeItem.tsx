@@ -3,11 +3,14 @@ interface TimeItemProps {
     isActive: boolean,
     uuid: string,
     time: string,
-    cast: { id: number, name: string }[]
+    cast: { id: number, name: string }[] | null
 }
 
 function TimeItem (props :TimeItemProps) {
-    const castText = props.cast.map((item) => { return item.name }).join(", ")
+    let castText = ""
+    if(props.cast) {
+        castText = props.cast.map((item) => { return item.name }).join(", ")
+    }
     const onClickTime = () => {
         props.onClick(props.uuid)
     }
