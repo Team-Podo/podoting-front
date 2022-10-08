@@ -2,7 +2,7 @@ import {ReservationPageWrapper} from "./ReservationPage.style";
 import React, {useEffect, useState} from "react";
 import {Seat} from "../../models/seat";
 import SeatItem from "../../components/SeatItem/SeatItem";
-import {getSeats} from "../../apis/seat";
+import {bookSeats, getSeats} from "../../apis/seat";
 import {Detail} from "../../models/detail";
 import moment from "moment";
 
@@ -60,6 +60,7 @@ function ReservationPage() {
         selectedSeats.map((s) => {
             selectedSeatsUUID.push(s.uuid)
         })
+        scheduleUUID && bookSeats({scheduleUUID, seatUUIDs:selectedSeatsUUID})
         console.log(selectedSeatsUUID)
     }
 

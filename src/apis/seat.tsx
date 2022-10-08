@@ -17,3 +17,13 @@ export async function getSeats({performanceID, scheduleUUID}: {
     return res.data
 }
 
+
+export async function bookSeats({scheduleUUID, seatUUIDs}: {
+    scheduleUUID: string
+    seatUUIDs: string[]
+}) {
+    const res = await axios.post<seatResponse>(`https://api.podoting.com/book/${scheduleUUID}`, { seat_uuids: seatUUIDs})
+    console.log(res)
+    return res.data
+}
+
