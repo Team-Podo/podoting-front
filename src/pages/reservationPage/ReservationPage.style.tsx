@@ -2,14 +2,13 @@ import styled from "styled-components";
 
 export const ReservationPageWrapper = styled.div`{
   width: 1028px;
-  height: 620px;
-  overflow: scroll;
+  height: 618px;
   position: relative;
   display: -webkit-inline-flex;
 
   .seat-map-wrapper {
-    width: 660px;
-    height: 620px;
+    width: 658px;
+    height: 618px;
     background-color: lightgray;
     object-fit: cover;
   }

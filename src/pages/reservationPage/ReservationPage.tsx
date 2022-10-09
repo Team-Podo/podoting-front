@@ -35,7 +35,6 @@ function ReservationPage() {
             setSeatImg(s.backgroundImage)
             setSeats(s.seats)
         })
-        console.log(scheduleUUID)
     }
 
     function addSelectedSeats(id: string) {
@@ -60,8 +59,10 @@ function ReservationPage() {
         selectedSeats.map((s) => {
             selectedSeatsUUID.push(s.uuid)
         })
-        scheduleUUID && bookSeats({scheduleUUID, seatUUIDs:selectedSeatsUUID})
-        console.log(selectedSeatsUUID)
+        scheduleUUID && bookSeats({scheduleUUID, seatUUIDs:selectedSeatsUUID}).then(() => {
+            window.opener.location.replace("/orders")
+            window.close()
+        })
     }
 
     return <ReservationPageWrapper>
