@@ -1,12 +1,15 @@
 import axios from "axios";
 import {Seat} from "../models/seat";
 import {Schedule} from "../models/schedule";
+import {getToken} from "../utils/token";
 
 interface seatResponse extends Seat {
     backgroundImage: string,
     seats: Seat[]
     schedules: Schedule[]
 }
+
+axios.defaults.headers.common["Authorization"] = getToken()
 
 export async function getSeats({performanceID, scheduleUUID}: {
     performanceID: string

@@ -8,8 +8,9 @@ import CastItem from "../CastItem/CastItem";
 import {Cast} from "../../models/cast";
 import {CastItemWrapper} from "../CastItem/CastItem.style";
 import {Schedule} from "../../models/schedule";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import TimeItem from "../TimeItem/TimeItem";
+import {getToken} from "../../utils/token";
 
 function DetailInfoBox() {
     const {id} = useParams()
@@ -20,8 +21,11 @@ function DetailInfoBox() {
     const [schedules, setSchedules] = useState<Schedule[]>([])
     const [times, setTimes] = useState<Schedule[]>([])
     const [activeScheduleUUID, setActiveScheduleUUID] = useState("")
+    const [activeTab, setActiveTab] = useState("content")
+    const navigate = useNavigate()
 
     useEffect(function () {
+        console.log(getToken())
         getDetails(Number(id)).then((res) => {
             setDetails(res)
             setCasts(res.cast)
@@ -60,13 +64,17 @@ function DetailInfoBox() {
 
     function onClickOpenResWindow(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault()
+        if(!getToken()) {
+            navigate("/login");
+            return false;
+        }
         const reservationProps = {
             performanceId: id,
             scheduleUUID: activeScheduleUUID,
             details: details
         }
         localStorage.setItem("reservationProps", JSON.stringify(reservationProps))
-        window.open("/res", "popupname", 'width=1028,height=620,location=no,status=no,scrollbars=yes')
+        window.open("/res", "podoting - 예매", 'width=1028,height=618,location=no,status=no,scrollbars=yes')
     }
 
     return <DetailWrapper>
@@ -126,23 +134,26 @@ function DetailInfoBox() {
             <div className="content">
                 <ContentTitlesWrapper>
                     <ul>
-                        <li className="active">공연정보</li>
-                        <li>캐스팅</li>
-                        <li>스케줄</li>
-                        <li>여기디자인어려움</li>
+                        <li className="active" onClick={() => setActiveTab("content")}>공연정보</li>
+                        <li onClick={() =>setActiveTab("casts")}>캐스팅</li>
+                        <li onClick={() =>setActiveTab("schedule")}>스케줄</li>
+                        <li onClick={() =>setActiveTab("")}>여기디자인어려움</li>
                     </ul>
                 </ContentTitlesWrapper>
-                <CastItemWrapper>
-                    {casts && casts.map((i) => <CastItem name={i.name} profile={i.profile} role={i.role} key={i.id}/>)}
-                </CastItemWrapper>
-                <div className="content">
-                    {contents?.map((i) => {
-                        return <div className="content-inner" key={i.uuid}>
-                            <h3>{i.title}</h3>
-                            <div dangerouslySetInnerHTML={{__html: i.content}}></div>
+                    <>
+                        <CastItemWrapper>
+                            {casts && casts.map((i) => <CastItem name={i.name} profile={i.profile} role={i.role}
+                                                                 key={i.id}/>)}
+                        </CastItemWrapper>
+                        <div className="content">
+                            {contents?.map((i) => {
+                                return <div className="content-inner" key={i.uuid}>
+                                    <h3>{i.title}</h3>
+                                    <div dangerouslySetInnerHTML={{__html: i.content}}></div>
+                                </div>
+                            })}
                         </div>
-                    })}
-                </div>
+                    </>
             </div>
         </div>
     </DetailWrapper>
