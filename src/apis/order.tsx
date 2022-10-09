@@ -5,5 +5,6 @@ axios.defaults.headers.common["Authorization"] = getToken()
 
 export async function getOrders() {
     const res = await axios.get(`https://api.podoting.com/mypage/order-history`)
-    console.log(res)
+    console.log(res.data.orders)
+    return res
 }
