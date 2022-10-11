@@ -1,20 +1,22 @@
 import logoImg from "../assets/images/podoting_logo.jpg";
 import styled from "styled-components";
-import {Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 export const MainPageStyle = styled.div`{
-  text-align: center;
-  margin-top: 10rem;
-  display: -webkit-flex;
+  min-height: 100vh;
+  display: flex;
   flex-direction: column;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
   align-items: center;
-  
+
   .logo {
     cursor: pointer;
-    width: 20rem;
-    margin-bottom: 5rem;
+    width: 15rem;
+    margin-bottom: 3rem;
   }
-  
+
   button {
     cursor: pointer;
     width: 10rem;
@@ -25,22 +27,21 @@ export const MainPageStyle = styled.div`{
     color: #fff;
     font-weight: bold;
   }
-  
+
   button:hover {
     border: 2px solid #764abc;
     background-color: #fff;
     color: #764abc;
   }
-  
+
 }`
 
 
 function MainPage() {
+    const navigate = useNavigate()
     return <MainPageStyle>
         <img src={logoImg} alt="logo" className="logo"/>
-        <Link to="/musical/1">
-            <button>ENTER PODOTING</button>
-        </Link>
+        <button onClick={() => navigate("/musicals")}>ENTER PODOTING</button>
     </MainPageStyle>
 }
 

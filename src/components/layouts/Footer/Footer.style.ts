@@ -5,7 +5,7 @@ export const FooterStyle = styled.div`
   height: 100px;
   
   .footer-inner {
-    width: 84rem;
+    max-width: 84rem;
     margin: 0 auto;
   }
   

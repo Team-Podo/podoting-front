@@ -143,6 +143,12 @@
   background-color: #e6e6e6;
 }
 
+.container {
+  max-width: 84rem;
+  min-height: 40rem;
+  margin: 4rem auto;
+}
+
 .button {
   cursor: pointer;
   padding: 1rem;

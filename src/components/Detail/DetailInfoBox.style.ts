@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const DetailWrapper = styled.div`
   .common-section {
-    width: 84rem;
+    max-width: 84rem;
     margin: 0 auto;
   }
 

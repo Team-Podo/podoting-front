@@ -8,7 +8,7 @@ export const NavWrapper = styled.nav`
     -webkit-align-items: center;
     -webkit-justify-content: space-between;
     padding: 5px 0;
-    width: 84rem;
+    max-width: 84rem;
     margin: 0 auto;
   }
 
