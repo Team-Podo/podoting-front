@@ -8,22 +8,24 @@ import LoginPage from "./pages/loginPage/LoginPage";
 import OrderPage from "./pages/orderPage/OrderPage";
 import Nav from "./components/layouts/Nav/Nav";
 import Footer from "./components/layouts/Footer/Footer";
+import NotFound from "./pages/notFound/NotFound";
+import PerformancePage from "./pages/performancePage/PerformancePage";
 
 function App() {
     return (
-        <div id="container">
-            <BrowserRouter>
-                <Nav/>
-                <Routes>
-                    <Route path="/" element={<MainPage/>}/>
-                    <Route path="/musical/:id" element={<DetailPage/>}/>
-                    <Route path="/res" element={<ReservationPage/>}/>
-                    <Route path="/login" element={<LoginPage/>}/>
-                    <Route path="/orders" element={<OrderPage/>}/>
-                </Routes>
-                <Footer/>
-            </BrowserRouter>
-        </div>
+        <BrowserRouter>
+            <Nav/>
+            <Routes>
+                <Route path="/" element={<MainPage/>}/>
+                <Route path="/musicals" element={<PerformancePage/>}/>
+                <Route path="/musical/:id" element={<DetailPage/>}/>
+                <Route path="/res" element={<ReservationPage/>}/>
+                <Route path="/login" element={<LoginPage/>}/>
+                <Route path="/orders" element={<OrderPage/>}/>
+                <Route path={"*"} element={<NotFound/>}/>
+            </Routes>
+            <Footer/>
+        </BrowserRouter>
     );
 }
 
