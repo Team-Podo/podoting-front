@@ -9,7 +9,11 @@ interface seatResponse extends Seat {
     schedules: Schedule[]
 }
 
-axios.defaults.headers.common["Authorization"] = getToken()
+async function addAuth() {
+    const token = await getToken()
+
+    return { headers: {"Authorization": `Bearer ${token}`} }
+}
 
 export async function getSeats({performanceID, scheduleUUID}: {
     performanceID: string
@@ -25,8 +29,8 @@ export async function bookSeats({scheduleUUID, seatUUIDs}: {
     scheduleUUID: string
     seatUUIDs: string[]
 }) {
-    const res = await axios.post<seatResponse>(`https://api.podoting.com/book/${scheduleUUID}`, { seat_uuids: seatUUIDs})
-    console.log(res)
+    const res = await axios.post<seatResponse>(`https://api.podoting.com/book/${scheduleUUID}`, { seat_uuids: seatUUIDs}, await addAuth())
+
     return res.data
 }
 

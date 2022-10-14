@@ -1,5 +1,6 @@
 import {getAuth, signInWithEmailAndPassword, signOut} from "firebase/auth";
 import {initializeApp} from "firebase/app";
+import {setToken} from "../utils/token";
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -15,9 +16,7 @@ export async function login(data: { email: string, password: string }) {
     return signInWithEmailAndPassword(auth, data.email, data.password)
         .then((userCredential) => {
             const user = userCredential.user;
-            user.getIdToken().then((token) => {
-                localStorage.setItem("token", token)
-            })
+            user.getIdToken().then((token) => { setToken(token)})
             return 200
 
         })

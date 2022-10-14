@@ -11,11 +11,12 @@ import {Schedule} from "../../models/schedule";
 import {useNavigate, useParams} from "react-router-dom";
 import TimeItem from "../TimeItem/TimeItem";
 import {getToken} from "../../utils/token";
+import {Viewer} from "@toast-ui/react-editor";
 
 function DetailInfoBox() {
     const {id} = useParams()
     const [date, setDate] = useState(new Date())
-    const [contents, setContents] = useState<Content[]>()
+    const [contents, setContents] = useState<Content[]>([])
     const [details, setDetails] = useState<Detail>()
     const [casts, setCasts] = useState<Cast[]>([])
     const [schedules, setSchedules] = useState<Schedule[]>([])
@@ -31,24 +32,22 @@ function DetailInfoBox() {
             setCasts(res.cast)
             setSchedules(res.schedules)
             setContents(res.contents)
+            if (res.schedules) {
+                const [year, month, date] = res.schedules[0].date.split("-")
+                setDate(new Date(Number(year), Number(month) - 1, Number(date)))
+            }
         }).catch((e) => console.log(e))
     }, [id])
 
-
     useEffect(function () {
-        if (schedules.length) {
-            const [year, month, date] = schedules[0].date.split("-")
-            setDate(new Date(Number(year), Number(month) - 1, Number(date)))
-        }
-    }, [schedules])
-
-    useEffect(function () {
-        const times = schedules.filter((i) => {
-            return i.date === moment(date).format("YYYY-MM-DD")
-        })
-        setTimes(times)
-        if (times.length > 0) {
-            setActiveScheduleUUID(times[0].uuid)
+        if(schedules) {
+            const times = schedules.filter((i) => {
+                return i.date === moment(date).format("YYYY-MM-DD")
+            })
+            setTimes(times)
+            if (times.length > 0) {
+                setActiveScheduleUUID(times[0].uuid)
+            }
         }
     }, [schedules, date])
 
@@ -126,7 +125,11 @@ function DetailInfoBox() {
                                                              onClick={setActiveScheduleUUID} key={i.uuid} uuid={i.uuid}
                                                              time={i.time} cast={i.cast ?? null}/>)}
                     </div>
-                    <button className="button" onClick={onClickOpenResWindow}>예매하기</button>
+                    {
+                        schedules ?
+                            <button className="button" onClick={onClickOpenResWindow}>예매하기</button> :
+                            <button className="button btn-disabled" disabled={true}>예매종료</button>
+                    }
                 </div>
             </div>
         </div>
@@ -146,12 +149,11 @@ function DetailInfoBox() {
                                                                  key={i.id}/>)}
                         </CastItemWrapper>
                         <div className="content">
-                            {contents?.map((i) => {
-                                return <div className="content-inner" key={i.uuid}>
+                            { contents && contents.map((i, idx) =>
+                                <div className="content-inner" key={idx}>
                                     <h3>{i.title}</h3>
-                                    <div dangerouslySetInnerHTML={{__html: i.content}}></div>
-                                </div>
-                            })}
+                                    <Viewer initialValue={i.content}/>
+                                </div> )}
                         </div>
                     </>
             </div>

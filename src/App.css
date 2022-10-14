@@ -159,3 +159,13 @@
   color: #fff;
   font-weight: bold;
 }
+
+.btn-disabled {
+  cursor: initial;
+  background-color: #a7acb6;
+}
+
+.title {
+  text-align: center;
+  margin: 1rem;
+}

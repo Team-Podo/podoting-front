@@ -2,6 +2,7 @@ import {useForm} from "react-hook-form";
 import {button} from "aws-amplify";
 import {useNavigate} from "react-router-dom";
 import {login} from "../../apis/auth";
+import {LoginPageStyle} from "./LoginPageStyle";
 
 interface LoginFormData {
     email: string;
@@ -20,7 +21,7 @@ function LoginPage() {
         })
     }))
 
-    return <>
+    return <LoginPageStyle className={"container"}>
         <form onSubmit={onSubmit}>
             <div>
                 <label htmlFor={"email"}>이메일</label>
@@ -32,7 +33,7 @@ function LoginPage() {
             </div>
             <button className={"button"}>로그인</button>
         </form>
-    </>
+    </LoginPageStyle>
 }
 
 export default LoginPage
