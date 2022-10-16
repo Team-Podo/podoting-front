@@ -42,6 +42,7 @@ function MainPage() {
     return <MainPageStyle>
         <img src={logoImg} alt="logo" className="logo"/>
         <button onClick={() => navigate("/musicals")}>ENTER PODOTING</button>
+        <button onClick={() => window.location.href = "https://partner.podoting.com/"}>ENTER ADMIN</button>
     </MainPageStyle>
 }
 
