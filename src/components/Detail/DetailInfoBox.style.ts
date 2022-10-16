@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const DetailWrapper = styled.div`
   .common-section {
-    max-width: 84rem;
+    width: 84rem;
     margin: 0 auto;
   }
 
@@ -53,16 +53,14 @@ export const DetailWrapper = styled.div`
   }
 
   .wrapper {
-    position: relative;
+    display: -webkit-flex;
+    -webkit-flex-direction: row;
   }
 
   .reservation-box {
     width: 27rem;
     border: 1px solid #000;
     border-radius: 16px;
-    position: absolute;
-    top: 0;
-    right: 0;
     padding: 2rem;
   }
 
@@ -113,7 +111,6 @@ export const DetailWrapper = styled.div`
   }
 
   .content {
-    min-height: 3000px;
     width: 55rem;
   }
 

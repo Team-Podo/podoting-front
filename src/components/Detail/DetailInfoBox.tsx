@@ -137,25 +137,35 @@ function DetailInfoBox() {
             <div className="content">
                 <ContentTitlesWrapper>
                     <ul>
-                        <li className="active" onClick={() => setActiveTab("content")}>공연정보</li>
-                        <li onClick={() =>setActiveTab("casts")}>캐스팅</li>
-                        <li onClick={() =>setActiveTab("schedule")}>스케줄</li>
-                        <li onClick={() =>setActiveTab("")}>여기디자인어려움</li>
+                        <li className={activeTab === "content" ? "active" : ""}
+                            onClick={() => setActiveTab("content")}>공연정보
+                        </li>
+                        <li className={activeTab === "casts" ? "active" : ""}
+                            onClick={() => setActiveTab("casts")}>캐스팅
+                        </li>
+                        <li className={activeTab === "schedule" ? "active" : ""}
+                            onClick={() => setActiveTab("schedule")}>스케줄
+                        </li>
+                        <li className={activeTab === "tab" ? "active" : ""} onClick={() => setActiveTab("")}>리뷰
+                        </li>
                     </ul>
                 </ContentTitlesWrapper>
+                {activeTab === "content" ?
                     <>
                         <CastItemWrapper>
                             {casts && casts.map((i) => <CastItem name={i.name} profile={i.profile} role={i.role}
                                                                  key={i.id}/>)}
                         </CastItemWrapper>
                         <div className="content">
-                            { contents && contents.map((i, idx) =>
+                            {contents && contents.map((i, idx) =>
                                 <div className="content-inner" key={idx}>
                                     <h3>{i.title}</h3>
                                     <Viewer initialValue={i.content}/>
-                                </div> )}
+                                </div>)}
                         </div>
                     </>
+                    : activeTab === "casts" ? <div>추가된 캐스트 정보가 없습니다.</div> : "내용이 없습니다."
+                }
             </div>
         </div>
     </DetailWrapper>
