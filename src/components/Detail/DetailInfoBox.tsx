@@ -26,7 +26,6 @@ function DetailInfoBox() {
     const navigate = useNavigate()
 
     useEffect(function () {
-        console.log(getToken())
         getDetails(Number(id)).then((res) => {
             setDetails(res)
             setCasts(res.cast)

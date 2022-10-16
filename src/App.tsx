@@ -10,6 +10,7 @@ import Nav from "./components/layouts/Nav/Nav";
 import Footer from "./components/layouts/Footer/Footer";
 import NotFound from "./pages/notFound/NotFound";
 import PerformancePage from "./pages/performancePage/PerformancePage";
+import JoinPage from "./pages/joinPage/JoinPage";
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                 <Route path="/musical/:id" element={<DetailPage/>}/>
                 <Route path="/res" element={<ReservationPage/>}/>
                 <Route path="/login" element={<LoginPage/>}/>
+                <Route path="/join" element={<JoinPage/>}/>
                 <Route path="/orders" element={<OrderPage/>}/>
                 <Route path={"*"} element={<NotFound/>}/>
             </Routes>

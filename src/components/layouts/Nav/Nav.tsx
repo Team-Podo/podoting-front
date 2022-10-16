@@ -35,7 +35,7 @@ function Nav() {
                         </>
                         : <>
                             <li onClick={() => navigate("/login")}>로그인</li>
-                            <li>회원가입</li>
+                            <li onClick={() => navigate("/join")}>회원가입</li>
                         </>}
                 </ul>
             </div>
