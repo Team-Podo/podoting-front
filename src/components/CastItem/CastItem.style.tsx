@@ -4,9 +4,7 @@ export const CastItemWrapper = styled.div`
 
   &>div{
     display: inline-block;
-    margin-top: 2rem;
-    margin-right: 1rem;
-    margin-left: 1rem;
+    margin: 2rem 1rem;
     text-align: center;
   }
   

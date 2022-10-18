@@ -1,19 +1,21 @@
-import {ContentTitlesWrapper, DetailWrapper} from "./DetailInfoBox.style"
 import Calendar, {CalendarTileProperties} from "react-calendar"
 import React, {useEffect, useState} from "react";
 import moment from "moment";
-import {getDetails} from "../../apis/detail";
-import {Content, Detail} from "../../models/detail";
-import CastItem from "../CastItem/CastItem";
-import {Cast} from "../../models/cast";
-import {CastItemWrapper} from "../CastItem/CastItem.style";
-import {Schedule} from "../../models/schedule";
 import {useNavigate, useParams} from "react-router-dom";
-import TimeItem from "../TimeItem/TimeItem";
+import {Content, Detail} from "../../models/detail";
+import {Cast} from "../../models/cast";
+import {Schedule} from "../../models/schedule";
+import {getDetails} from "../../apis/detail";
 import {getToken} from "../../utils/token";
+import {ContentTitlesWrapper, DetailPageStyle} from "./DetailPageStyle";
+import TimeItem from "../../components/TimeItem/TimeItem";
+import CastItem from "../../components/CastItem/CastItem";
+import {CastItemWrapper} from "../../components/CastItem/CastItem.style";
 import {Viewer} from "@toast-ui/react-editor";
+import Empty from "../../components/empty/Empty";
+import ScheduleList from "../../components/detail/scheduleList/ScheduleList";
 
-function DetailInfoBox() {
+function DetailPage() {
     const {id} = useParams()
     const [date, setDate] = useState(new Date())
     const [contents, setContents] = useState<Content[]>([])
@@ -27,10 +29,12 @@ function DetailInfoBox() {
 
     useEffect(function () {
         getDetails(Number(id)).then((res) => {
+            console.log(res.schedules)
             setDetails(res)
             setCasts(res.cast)
             setSchedules(res.schedules)
             setContents(res.contents)
+            console.log(res.contents)
             if (res.schedules) {
                 const [year, month, date] = res.schedules[0].date.split("-")
                 setDate(new Date(Number(year), Number(month) - 1, Number(date)))
@@ -39,7 +43,7 @@ function DetailInfoBox() {
     }, [id])
 
     useEffect(function () {
-        if(schedules) {
+        if (schedules) {
             const times = schedules.filter((i) => {
                 return i.date === moment(date).format("YYYY-MM-DD")
             })
@@ -62,7 +66,7 @@ function DetailInfoBox() {
 
     function onClickOpenResWindow(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault()
-        if(!getToken()) {
+        if (!getToken()) {
             navigate("/login");
             return false;
         }
@@ -75,7 +79,7 @@ function DetailInfoBox() {
         window.open("/res", "podoting - 예매", 'width=1028,height=618,location=no,status=no,scrollbars=yes')
     }
 
-    return <DetailWrapper>
+    return <DetailPageStyle>
         <div className="info common-section">
             <div className="wrapper">
                 <div className="info-left">
@@ -142,32 +146,32 @@ function DetailInfoBox() {
                         <li className={activeTab === "casts" ? "active" : ""}
                             onClick={() => setActiveTab("casts")}>캐스팅
                         </li>
-                        <li className={activeTab === "schedule" ? "active" : ""}
-                            onClick={() => setActiveTab("schedule")}>스케줄
+                        <li className={activeTab === "schedules" ? "active" : ""}
+                            onClick={() => setActiveTab("schedules")}>스케줄
                         </li>
-                        <li className={activeTab === "tab" ? "active" : ""} onClick={() => setActiveTab("")}>리뷰
+                        <li className={activeTab === "reviews" ? "active" : ""} onClick={() => setActiveTab("reviews")}>리뷰
                         </li>
                     </ul>
                 </ContentTitlesWrapper>
                 {activeTab === "content" ?
-                    <>
-                        <CastItemWrapper>
-                            {casts && casts.map((i) => <CastItem name={i.name} profile={i.profile} role={i.role}
-                                                                 key={i.id}/>)}
-                        </CastItemWrapper>
                         <div className="content">
                             {contents && contents.map((i, idx) =>
-                                <div className="content-inner" key={idx}>
+                                <div style={{whiteSpace: "pre-line"}} className="content-inner" key={idx}>
                                     <h3>{i.title}</h3>
                                     <Viewer initialValue={i.content}/>
                                 </div>)}
                         </div>
-                    </>
-                    : activeTab === "casts" ? <div>추가된 캐스트 정보가 없습니다.</div> : "내용이 없습니다."
+                    : activeTab === "casts" ? ( casts ?
+                            <CastItemWrapper className="content-inner">
+                                {casts && casts.map((i) => <CastItem name={i.name} profile={i.profile} role={i.role}
+                                                                     key={i.id}/>)}
+                            </CastItemWrapper> : <Empty text={"추가된 캐스트 정보가 없습니다."}/> )
+                        : activeTab === "schedules" ? ( schedules ? <ScheduleList schedules={schedules}/> : <Empty text={"스케줄이 없습니다."}/> )
+                            : activeTab === "reviews" ? <Empty text={"작성된 리뷰가 없습니다."}/> : null
                 }
             </div>
         </div>
-    </DetailWrapper>
+    </DetailPageStyle>
 }
 
-export default DetailInfoBox
+export default DetailPage

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const DetailWrapper = styled.div`
+export const DetailPageStyle = styled.div`
   .common-section {
     width: 84rem;
     margin: 0 auto;
@@ -115,7 +115,7 @@ export const DetailWrapper = styled.div`
   }
 
   .content-inner {
-    padding-top: 4rem;
+    padding: 2rem 0;
     width: 100%;
   }
 
@@ -137,7 +137,6 @@ export const ContentTitlesWrapper = styled.div`
     cursor: pointer;
     text-align: center;
     flex: 1;
-    max-width: 170px;
     padding: 0.8rem 1.7rem;
     border-top: 1px solid #764abc;
     border-bottom: 1px solid lightgray;
