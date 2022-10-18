@@ -8,7 +8,7 @@ export const NavWrapper = styled.nav`
     -webkit-align-items: center;
     -webkit-justify-content: space-between;
     padding: 5px 0;
-    max-width: 84rem;
+    width: 84rem;
     margin: 0 auto;
   }
 
@@ -25,10 +25,13 @@ export const NavWrapper = styled.nav`
 `
 
 export const NavContentWrapper = styled.div`
+  @media(max-width: 84rem) {
+    width: fit-content;
+  }
   border-top: 1px solid #d1cfd1;
   border-bottom: 1px solid #d1cfd1;
-  min-height: 5rem;
   box-shadow: 0px 4px 8px rgb(0 0 0 / 6%);
+  min-height: 5rem;
   
   .logo {
     height: 3rem;
