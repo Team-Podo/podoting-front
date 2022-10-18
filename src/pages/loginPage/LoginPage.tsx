@@ -1,8 +1,8 @@
 import {useForm} from "react-hook-form";
-import {button} from "aws-amplify";
 import {useNavigate} from "react-router-dom";
 import {login} from "../../apis/auth";
 import {LoginPageStyle} from "./LoginPageStyle";
+import {useAlarm} from "../../hooks/useAlarm";
 
 interface LoginFormData {
     email: string;
@@ -12,11 +12,14 @@ interface LoginFormData {
 function LoginPage() {
     const {register, handleSubmit} = useForm<LoginFormData>()
     const navigate = useNavigate()
+    const setAlarm = useAlarm()
 
     const onSubmit = handleSubmit((async data => {
         await login(data).then((res) => {
             if(res === 200) {
                 navigate(-1)
+            }else{
+                setAlarm("로그인에 실패하였습니다. 다시 시도해 주세요.")
             }
         })
     }))

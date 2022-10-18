@@ -1,8 +1,9 @@
 import {useForm} from "react-hook-form";
 import {button} from "aws-amplify";
 import {useNavigate} from "react-router-dom";
-import {join, login} from "../../apis/auth";
+import {join} from "../../apis/auth";
 import {LoginPageStyle} from "../loginPage/LoginPageStyle";
+import {useAlarm} from "../../hooks/useAlarm";
 
 
 interface JoinFormData {
@@ -13,11 +14,13 @@ interface JoinFormData {
 function JoinPage() {
     const {register, handleSubmit} = useForm<JoinFormData>()
     const navigate = useNavigate()
+    const setAlarm = useAlarm()
 
     const onSubmit = handleSubmit((async data => {
         await join(data).then((res) => {
             if(res === 200) {
                 navigate(-1)
+                setAlarm("회원가입 되었습니다.")
             }
         })
     }))
@@ -32,7 +35,7 @@ function JoinPage() {
                 <label htmlFor={"password"}>비밀번호</label>
                 <input type={"password"} {...register("password")} required={true} autoComplete={"off"} minLength={7}/>
             </div>
-            <button className={"button"}>로그인</button>
+            <button className={"button"}>회원가입</button>
         </form>
     </LoginPageStyle>
 }
