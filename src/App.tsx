@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import DetailPage from "./pages/DetailPage";
+import DetailPage from "./pages/detailPage/DetailPage";
 import MainPage from "./pages/MainPage";
 import ReservationPage from "./pages/reservationPage/ReservationPage";
 import LoginPage from "./pages/loginPage/LoginPage";
@@ -11,10 +11,13 @@ import Footer from "./components/layouts/Footer/Footer";
 import NotFound from "./pages/notFound/NotFound";
 import PerformancePage from "./pages/performancePage/PerformancePage";
 import JoinPage from "./pages/joinPage/JoinPage";
+import AlarmContainer from "./components/alarm/AlarmContainer";
 
 function App() {
     return (
         <BrowserRouter>
+            <div id={"modal-root"}></div>
+            <AlarmContainer/>
             <Nav/>
             <Routes>
                 <Route path="/" element={<MainPage/>}/>

@@ -5,6 +5,7 @@ import SeatItem from "../../components/SeatItem/SeatItem";
 import {bookSeats, getSeats} from "../../apis/seat";
 import {Detail} from "../../models/detail";
 import moment from "moment";
+import {useAlarm} from "../../hooks/useAlarm";
 
 function ReservationPage() {
     const [loaded, setLoaded] = useState(false)
@@ -16,6 +17,7 @@ function ReservationPage() {
     const [selectedSeats, setSelectedSeats] = useState<Seat[]>([])
     const [total, setTotal] = useState(0)
     const reservationProps = JSON.parse(localStorage.getItem("reservationProps") || "")
+    const setAlarm = useAlarm()
 
     useEffect(function () {
         setPerformanceID(reservationProps.performanceId)
@@ -57,7 +59,7 @@ function ReservationPage() {
     function onClickPay(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault()
         if (selectedSeats.length < 1) {
-            alert("좌석을 선택해 주세요");
+            setAlarm("좌석을 선택해 주세요");
             return;
         }
         const selectedSeatsUUID: string[] = []

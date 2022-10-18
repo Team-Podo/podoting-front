@@ -4,15 +4,17 @@ import {logout} from "../../../apis/auth";
 import {getToken} from "../../../utils/token";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
+import {useAlarm} from "../../../hooks/useAlarm";
 
 
 function Nav() {
     const navigate = useNavigate()
     const [token, setToken] = useState("")
+    const setAlarm = useAlarm()
 
     useEffect(() => {
         setToken(getToken())
-    }, [])
+    }, [localStorage.getItem("token")])
 
     function onClickLogout() {
         const token = localStorage.getItem("token")
@@ -20,6 +22,7 @@ function Nav() {
             logout()
         }
         setToken("")
+        setAlarm("로그아웃 되었습니다.")
     }
 
     if (window.location.pathname === ("/res") || window.location.pathname === ("/")) return null
