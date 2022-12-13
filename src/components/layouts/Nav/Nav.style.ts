@@ -8,8 +8,8 @@ export const NavWrapper = styled.nav`
   border-bottom: 1px solid #d1cfd1;
 
   .logo {
-    height: 2.5rem;
-    margin: 0.5rem;
+    height: 2rem;
+    margin: 1rem;
   }
   
   .nav-inner{
@@ -29,9 +29,10 @@ export const NavWrapper = styled.nav`
   }
   
   .search-input {
+    margin-left: 10px;
     padding: 5px 10px;
     border-radius: 10px;
-    border: 1px solid grey;
+    border: 1px solid #D5D5D5;
   }
 
   .search-input:focus-visible {

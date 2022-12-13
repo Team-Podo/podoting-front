@@ -1,5 +1,5 @@
 import {NavWrapper} from "./Nav.style";
-import logoImg from "../../../assets/images/podoting_logo.jpg"
+import logoImg from "../../../assets/images/Frame.svg"
 import {logout} from "../../../apis/auth";
 import {getToken} from "../../../utils/token";
 import {useNavigate} from "react-router-dom";
