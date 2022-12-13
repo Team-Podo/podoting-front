@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
 export const PerformancePageStyle = styled.div`{
+  ::-webkit-scrollbar {
+    //display: none;
+  }
+  
   display: -webkit-flex;
   -webkit-flex-direction: row;
   -webkit-flex-wrap: wrap;
@@ -51,6 +55,28 @@ export const PerformancePageStyle = styled.div`{
       border: none;
       padding: 8px 10px;
       cursor: pointer;
+    }
+  }
+
+  @media screen and (max-width:767px) {
+    /* 모바일 */
+    -webkit-flex-direction: column;
+    -webkit-align-items: unset;
+    
+    .single-performance {
+      -webkit-flex-wrap: nowrap;
+      -webkit-justify-content: unset;
+      border: none;
+      margin: 0;
+      
+      & img {
+        width: 5rem;
+        height: 7rem;
+      }
+      
+      & p {
+        font-size: 0.8rem;
+      }
     }
   }
 }`

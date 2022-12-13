@@ -21,8 +21,7 @@ function PerformancePage() {
         })
     }, [])
 
-    return <div>
-        <div className={"container"}>
+    return <div className={"container"}>
             <PerformancePageStyle>
                 {performances && performances.map((pf) =>
                     <div key={pf.id} className={"single-performance"}>
@@ -31,12 +30,11 @@ function PerformancePage() {
                             <p className={"performance-title"}>{pf.title}</p>
                             <p>{pf.startDate} ~ {pf.endDate}</p>
                             <p>{pf.runningTime}</p>
-                            <button onClick={() => navigate(`/musical/${pf.id}`)}>예매하기</button>
+                            <button onClick={() => navigate(`/musical/${pf.id}`)} >예매하기</button>
                         </div>
                     </div>)}
             </PerformancePageStyle>
         </div>
-    </div>
 }
 
 export default PerformancePage

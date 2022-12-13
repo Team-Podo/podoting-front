@@ -29,12 +29,13 @@ function Nav() {
 
     return <>
         <NavWrapper>
-                <div className='nav-inner'>
+                <div className='nav-inner inner'>
                     <ul className='nav-left'>
                         <img src={logoImg} alt="logo" className="logo" onClick={() => navigate("/musicals")}/>
                         <input className={"search-input"} type={"text"}/>
                     </ul>
-                    <ul className='nav-right'>
+                    <input className={"search-input-mobile"} type={"text"} placeholder={"작품명, 장소, 키워드로 찾아보세요."}/>
+                    <ul className='nav-right pc'>
                         { token ? <>
                                 <li onClick={onClickLogout}>로그아웃</li>
                                 |
