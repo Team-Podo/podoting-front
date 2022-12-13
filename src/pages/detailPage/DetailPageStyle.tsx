@@ -11,12 +11,12 @@ export const DetailPageStyle = styled.div`
   }
 
   .info-left {
-    width: 55rem;
+    width: 58rem;
   }
 
   .info-left-img-box {
     padding: 10px;
-    width: 25rem;
+    width: 20rem;
     display: inline-block;
     height: 30rem;
   }
@@ -27,8 +27,8 @@ export const DetailPageStyle = styled.div`
 
   .info-left-detail-box {
     width: 28rem;
-    padding-left: 20px;
-    padding-top: 20px;
+    padding-left: 2rem;
+    padding-top: 2rem;
     display: inline-block;
     vertical-align: top;
   }
@@ -58,6 +58,8 @@ export const DetailPageStyle = styled.div`
   }
 
   .reservation-box {
+    position: fixed;
+    right: calc((100vw - 85rem) / 2);
     width: 27rem;
     border: 1px solid #000;
     border-radius: 16px;
@@ -123,9 +125,64 @@ export const DetailPageStyle = styled.div`
     margin-bottom: 1rem;
   }
 
-  .content-inner>img {
-    width: 100%;
+  .content-inner img {
+    width: 90%;
   }
+  
+  @media screen and (max-width:767px) {
+    .common-section {
+      width: 100%;
+    }
+
+    .info-left, .content {
+      width: 100%;
+    }
+    
+    .info-left-img-box {
+      padding: 0 10px;
+      width: 30%;
+      height: auto;
+    }
+    
+    .info-left-detail-box {
+      width: 70%;
+      padding: 0;
+      display: inline-block;
+      vertical-align: top;
+    }
+    
+    #title {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .info-left-detail {
+      font-size: 0.8rem;
+      margin-bottom: 0.3rem;
+    }
+    
+    .reservation-box {
+      display: none;
+    }
+    
+    .content-inner {
+      padding: 1.5rem 15px;
+    }
+    
+    .content-inner h3, .content-inner h2 {
+      font-size: 1.1rem;
+      margin-bottom: 0;
+    }
+    
+    .content-inner p {
+      font-size: 0.9rem;
+    }
+    
+    .content-inner img {
+      width: 100%;
+    }
+  }
+
 `
 
 export const ContentTitlesWrapper = styled.div`
@@ -151,5 +208,29 @@ export const ContentTitlesWrapper = styled.div`
   
   li:last-child {
     border-right: 1px solid #764abc;
+  }
+  
+  @media screen and (max-width:767px) {
+    padding-right: 0;
+    
+    ul {
+      -webkit-flex-flow:row wrap;
+    }
+    
+    li {
+      font-size: 0.9rem;
+      flex: 0 0 50%;
+      padding: 0.5rem 0;
+      border: none;
+      background-color: #F6F6F6;
+    }
+
+    li:last-child {
+      border: none;
+    }
+    
+    li.active {
+      background-color: rgba(118, 72, 188, 0.3);
+    }
   }
 `

@@ -54,7 +54,7 @@ function DetailPage() {
                         </div>
                         <div className="info-left-detail-box">
                             <p id="title">{details && details.title}</p>
-                            <div className="border"></div>
+                            <div className="border pc"></div>
                             <div className="info-left-detail">
                                 <span>기간</span>
                                 <div>{details && details.startDate} ~ {details && details.endDate}</div>

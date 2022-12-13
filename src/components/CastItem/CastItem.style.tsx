@@ -29,4 +29,27 @@ export const CastItemWrapper = styled.div`
     color: #757575;
     font-size: 0.8rem;
   }
+  
+  @media screen and (max-width:767px) {
+    
+    /* 모바일 */
+    &>div{
+      width: 25%;
+      display: inline-block;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .profile {
+      margin: 10px auto;
+      width: 4rem;
+      height: 4rem;
+      
+    }
+    
+    .profile img {
+      width: 4rem;
+    }
+  }
+
 `
