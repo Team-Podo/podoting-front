@@ -1,17 +1,43 @@
 import styled from "styled-components";
 
 export const NavWrapper = styled.nav`
+  @media(max-width: 84rem) {
+    width: fit-content;
+  }
+  
+  border-bottom: 1px solid #d1cfd1;
+
+  .logo {
+    height: 2.5rem;
+    margin: 0.5rem;
+  }
   
   .nav-inner{
     display: -webkit-flex;
     -webkit-flex-direction: row;
     -webkit-align-items: center;
     -webkit-justify-content: space-between;
-    padding: 5px 0;
+    padding: 5px 1rem;
     width: 84rem;
     margin: 0 auto;
   }
 
+  .nav-left {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .search-input {
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 1px solid grey;
+  }
+
+  .search-input:focus-visible {
+    outline: none;
+  }
+  
   .nav-right{
     min-width: 150px;
     display: flex;
@@ -22,20 +48,4 @@ export const NavWrapper = styled.nav`
     margin: 0 10px;
   }
 
-`
-
-export const NavContentWrapper = styled.div`
-  @media(max-width: 84rem) {
-    width: fit-content;
-  }
-  border-top: 1px solid #d1cfd1;
-  border-bottom: 1px solid #d1cfd1;
-  box-shadow: 0px 4px 8px rgb(0 0 0 / 6%);
-  min-height: 5rem;
-  
-  .logo {
-    height: 3rem;
-    margin: 1rem;
-  }
-  
 `

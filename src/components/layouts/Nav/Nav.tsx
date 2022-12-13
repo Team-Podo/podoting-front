@@ -1,4 +1,4 @@
-import {NavWrapper, NavContentWrapper} from "./Nav.style";
+import {NavWrapper} from "./Nav.style";
 import logoImg from "../../../assets/images/podoting_logo.jpg"
 import {logout} from "../../../apis/auth";
 import {getToken} from "../../../utils/token";
@@ -29,24 +29,24 @@ function Nav() {
 
     return <>
         <NavWrapper>
-            <div className='nav-inner'>
-                <div></div>
-                <ul className='nav-right'>
-                    { token ? <>
-                            <li onClick={onClickLogout}>로그아웃</li>
-                            <li onClick={() => navigate("/orders")}>주문내역</li>
-                        </>
-                        : <>
-                            <li onClick={() => navigate("/login")}>로그인</li>
-                            <li onClick={() => navigate("/join")}>회원가입</li>
-                        </>}
-                </ul>
-            </div>
-            <NavContentWrapper>
                 <div className='nav-inner'>
+                    <ul className='nav-left'>
                         <img src={logoImg} alt="logo" className="logo" onClick={() => navigate("/musicals")}/>
+                        <input className={"search-input"} type={"text"}/>
+                    </ul>
+                    <ul className='nav-right'>
+                        { token ? <>
+                                <li onClick={onClickLogout}>로그아웃</li>
+                                |
+                                <li onClick={() => navigate("/orders")}>주문내역</li>
+                            </>
+                            : <>
+                                <li onClick={() => navigate("/login")}>로그인</li>
+                                |
+                                <li onClick={() => navigate("/join")}>회원가입</li>
+                            </>}
+                    </ul>
                 </div>
-            </NavContentWrapper>
         </NavWrapper>
     </>
 }
