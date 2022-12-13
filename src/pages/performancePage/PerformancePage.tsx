@@ -8,6 +8,8 @@ interface Performance {
     title: string
     thumbUrl: string
     startDate: string
+    endDate: string
+    runningTime: string
 }
 
 function PerformancePage() {
@@ -23,10 +25,15 @@ function PerformancePage() {
         <div className={"container"}>
             <PerformancePageStyle>
                 {performances && performances.map((pf) =>
-                    <div key={pf.id} className={"single-performance"} onClick={() => navigate(`/musical/${pf.id}`)}>
-                    <img src={pf.thumbUrl}/>
-                    <p>{pf.title}</p>
-                </div>)}
+                    <div key={pf.id} className={"single-performance"}>
+                        <img src={pf.thumbUrl}/>
+                        <div>
+                            <p className={"performance-title"}>{pf.title}</p>
+                            <p>{pf.startDate} ~ {pf.endDate}</p>
+                            <p>{pf.runningTime}</p>
+                            <button onClick={() => navigate(`/musical/${pf.id}`)}>예매하기</button>
+                        </div>
+                    </div>)}
             </PerformancePageStyle>
         </div>
     </div>
