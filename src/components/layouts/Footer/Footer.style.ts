@@ -12,7 +12,7 @@ export const FooterStyle = styled.div`
   
   @media screen and (max-width:767px) {
     /* 모바일 */
-    width: 100%;
+    display: none;
   }
 
   p {
