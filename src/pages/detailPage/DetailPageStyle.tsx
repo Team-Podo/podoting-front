@@ -112,6 +112,10 @@ export const DetailPageStyle = styled.div`
     border: 2px solid #764abc;
   }
 
+  .mobile-reservation-btn-container {
+    display: none;
+  }
+  
   .content {
     width: 55rem;
   }
@@ -163,6 +167,19 @@ export const DetailPageStyle = styled.div`
     
     .reservation-box {
       display: none;
+    }
+
+    .mobile-reservation-btn-container {
+      display: block;
+      background-color: #fff;
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+    }
+    
+    .mobile-reservation-btn {
+      width: calc(100% - 8px);
+      margin: 4px;
     }
     
     .content-inner {

@@ -82,6 +82,13 @@ function DetailPage() {
                     <ReservationBox performanceID={id!} schedules={schedules} details={details!}/>
                 </div>
             </div>
+            <div className={"mobile-reservation-btn-container"}>
+                {
+                    schedules ?
+                        <button className={"mobile-reservation-btn button"}>예매하기</button> :
+                        <button className="mobile-reservation-btn button btn-disabled" disabled={true}>예매종료</button>
+                }
+            </div>
             <div className="common-section">
                 <div className="content">
                     <ContentTitlesWrapper>
