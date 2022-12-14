@@ -26,17 +26,19 @@ function JoinPage() {
     }))
 
     return <LoginPageStyle className={"container"}>
-        <form onSubmit={onSubmit}>
-            <div>
-                <label htmlFor={"email"}>이메일</label>
-                <input type={"text"} {...register("email")} required={true} autoComplete={"off"}/>
-            </div>
-            <div>
-                <label htmlFor={"password"}>비밀번호</label>
-                <input type={"password"} {...register("password")} required={true} autoComplete={"off"} minLength={7}/>
-            </div>
-            <button className={"button"}>회원가입</button>
-        </form>
+        <div>
+            <form onSubmit={onSubmit}>
+                <div>
+                    <label htmlFor={"email"}>Email Address</label>
+                    <input type={"text"} {...register("email")} required={true} autoComplete={"off"} placeholder={"podo@test.com"}/>
+                </div>
+                <div>
+                    <label htmlFor={"password"}>Password</label>
+                    <input type={"password"} {...register("password")} required={true} autoComplete={"off"} placeholder={"password"}/>
+                </div>
+                <button className={"button"}>가입하기</button>
+            </form>
+        </div>
     </LoginPageStyle>
 }
 

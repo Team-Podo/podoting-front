@@ -27,12 +27,12 @@ function LoginPage() {
     return <LoginPageStyle className={"container"}>
         <form onSubmit={onSubmit}>
             <div>
-                <label htmlFor={"email"}>이메일</label>
-                <input type={"text"} {...register("email")} required={true} autoComplete={"off"}/>
+                <label htmlFor={"email"}>Email Address</label>
+                <input type={"text"} {...register("email")} required={true} autoComplete={"off"} placeholder={"podo@test.com"}/>
             </div>
             <div>
-                <label htmlFor={"password"}>비밀번호</label>
-                <input type={"password"} {...register("password")} required={true} autoComplete={"off"}/>
+                <label htmlFor={"password"}>Password</label>
+                <input type={"password"} {...register("password")} required={true} autoComplete={"off"} placeholder={"password"}/>
             </div>
             <button className={"button"}>로그인</button>
         </form>
