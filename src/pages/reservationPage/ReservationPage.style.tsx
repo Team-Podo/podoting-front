@@ -68,4 +68,58 @@ export const ReservationPageWrapper = styled.div`{
     height: 50px;
     background-color: #e6d7e9;
   }
+
+
+  @media screen and (max-width:767px) {
+    /* 모바일 */
+    width: 100%;
+    height: 100vh;
+    overflow: scroll;
+    position: relative;
+    
+    .mobile-res-top {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: -webkit-flex;
+      -webkit-justify-content: space-between;
+      -webkit-align-items: center;
+      padding: 10px;
+      font-size: 0.9rem;
+      background-color: #f0f0f0;
+    }
+    
+    .mobile-res-top > div {
+      display: -webkit-flex;
+      -webkit-align-items: center;
+    }
+
+    .mobile-res-top > div > p {
+      margin-left: 10px;
+    }
+
+    .mobile-res-top button {
+      padding: 3px 7px;
+    }
+    
+    .reservation-data-wrapper-mobile {
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+    }
+    
+    .selected-seat-list-mobile {
+      padding: 10px;
+      width: 100%;
+      background-color: #f0f0f0;
+      font-size: 0.9rem;
+      height: 100px;
+      overflow: scroll;
+    }
+    .btn-sm {
+      padding: 6px 10px;
+    }
+  }
+
+  
 }`

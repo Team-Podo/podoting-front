@@ -10,6 +10,7 @@ import ScheduleList from "../../components/detail/scheduleList/ScheduleList";
 import ReservationBox from "../../components/detail/reservationBox/ReservationBox";
 import PerformanceContent from "../../components/detail/content/PerformanceContent";
 import PerformanceCasts from "../../components/detail/performanceCasts/PerformanceCasts";
+import ReservationBoxMobile from "../../components/detail/reservationBox/ReservationBoxMobile";
 
 
 function DetailPage() {
@@ -20,6 +21,7 @@ function DetailPage() {
     const [casts, setCasts] = useState<Cast[]>([])
     const [schedules, setSchedules] = useState<Schedule[]>([])
     const [activeTab, setActiveTab] = useState<string>("content")
+    const [opened, setOpened] = useState(false)
 
     useEffect(function () {
         getDetails(Number(id)).then((res) => {
@@ -85,10 +87,11 @@ function DetailPage() {
             <div className={"mobile-reservation-btn-container"}>
                 {
                     schedules ?
-                        <button className={"mobile-reservation-btn button"}>예매하기</button> :
+                        <button className={"mobile-reservation-btn button"} onClick={() => setOpened(true)}>예매하기</button> :
                         <button className="mobile-reservation-btn button btn-disabled" disabled={true}>예매종료</button>
                 }
             </div>
+            { opened && <ReservationBoxMobile performanceID={id!} schedules={schedules} details={details!} onChange={setOpened}/> }
             <div className="common-section">
                 <div className="content">
                     <ContentTitlesWrapper>

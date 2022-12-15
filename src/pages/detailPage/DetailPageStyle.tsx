@@ -45,11 +45,11 @@ export const DetailPageStyle = styled.div`
   }
 
   .info-left-detail span{
-    flex: 1;
+    -webkit-flex: 1;
   }
 
   .info-left-detail div {
-    flex: 2;
+    -webkit-flex: 2;
   }
 
   .wrapper {
@@ -82,8 +82,8 @@ export const DetailPageStyle = styled.div`
   .reservation-details {
     font-size: 14px;
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
+    display: -webkit-flex;
+    -webkit-flex-wrap: wrap;
     margin-bottom: 1rem;
   }
 
@@ -91,7 +91,7 @@ export const DetailPageStyle = styled.div`
     border: 2px solid #e5e5e5;
     border-radius: 10px;
     padding: 0.4rem;
-    flex: 1 1 40%;
+    -webkit-flex: 1 1 40%;
     cursor: pointer;
   }
 
@@ -198,6 +198,45 @@ export const DetailPageStyle = styled.div`
     .content-inner img {
       width: 100%;
     }
+    
+    .reservation-box-mobile {
+      padding: 1rem;
+      position: fixed;
+      top: 0;
+      background-color: #ffffff;
+      z-index: 999;
+      height: 100vh;
+    }
+
+    .reservation-box-mobile>p {
+      margin-left: 10px;
+      font-weight: 550;
+      margin-bottom: 1rem;
+    }
+
+    .reservation-box-mobile .react-calendar {
+      min-height: 310px;
+    }
+    
+    .reservation-details {
+      font-size: 14px;
+      width: 100%;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    
+    .reservation-details .time{
+      width: 100%;
+      margin-bottom: 0.6rem
+    }
+    
+    .close {
+      background-color: #ffffff;
+      border: none;
+      position: relative;
+      left: 95%;
+      font-size: 1.3rem;
+    }
   }
 
 `
@@ -210,7 +249,7 @@ export const ContentTitlesWrapper = styled.div`
   li {
     cursor: pointer;
     text-align: center;
-    flex: 1;
+    -webkit-flex: 1;
     padding: 0.8rem 1.7rem;
     border-top: 1px solid #764abc;
     border-bottom: 1px solid lightgray;
@@ -236,7 +275,7 @@ export const ContentTitlesWrapper = styled.div`
     
     li {
       font-size: 0.9rem;
-      flex: 0 0 50%;
+      -webkit-flex: 0 0 50%;
       padding: 0.5rem 0;
       border: none;
       background-color: #F6F6F6;
