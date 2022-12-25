@@ -39,7 +39,7 @@ function Nav() {
                         { token ? <>
                                 <li onClick={onClickLogout}>로그아웃</li>
                                 |
-                                <li onClick={() => navigate("/orders")}>주문내역</li>
+                                <li onClick={() => navigate("/orders")}>MY티켓</li>
                             </>
                             : <>
                                 <li onClick={() => navigate("/login")}>로그인</li>

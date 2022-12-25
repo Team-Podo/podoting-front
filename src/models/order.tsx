@@ -15,6 +15,7 @@ interface Performance {
     id: string
     title: string
     thumbnail: string
+    place: string
 }
 
 interface OrderDetail {
@@ -30,4 +31,5 @@ interface Seat {
     uuid: string
     name: string
     grade: string
+    color: string
 }

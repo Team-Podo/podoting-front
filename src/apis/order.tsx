@@ -1,5 +1,4 @@
 import axios from "axios";
-import {getAuth} from "firebase/auth";
 import {getToken} from "../utils/token";
 
 

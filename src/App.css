@@ -176,6 +176,17 @@
   margin: 1rem;
 }
 
+.title-sm {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 2rem 0 0.8rem 0;
+}
+
+.flex-row {
+  display: -webkit-flex;
+  -webkit-flex-direction: row;
+}
+
 @media screen and (max-width:767px) {
   /* 모바일 */
   .container {
