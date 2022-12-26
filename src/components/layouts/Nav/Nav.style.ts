@@ -20,24 +20,44 @@ export const NavWrapper = styled.nav`
     display: -webkit-flex;
     -webkit-justify-content: space-between;
     -webkit-align-items: center;
+    position: relative;
   }
   
-  .search-input, .search-input-mobile {
+  .search-form {
+    display: -webkit-flex;
+    -webkit-align-items: center;
+    -webkit-justify-content: center;
+  }
+  
+  .search-form > input, .search-input-mobile {
     padding: 5px 10px;
     border-radius: 10px;
     border: 1px solid #D5D5D5;
   }
 
-  .search-input {
+  .search-form > input {
     margin-left: 10px;
   }
 
-  .search-input:focus-visible {
+  .search-form > input:focus-visible {
     outline: none;
   }
 
-  .search-input-mobile {
+  .search-form-mobile {
+    width: 100%;
     display: none;
+  }
+  
+  .search-btn {
+    width: fit-content;
+    border: none;
+    background-color: #ffffff;
+  }
+  
+  .search-btn > image {
+    width: 27px;
+    cursor: pointer;
+    margin-left: 3px;
   }
   
   .nav-right{
@@ -63,12 +83,15 @@ export const NavWrapper = styled.nav`
       -webkit-flex-direction: column;
     }
     
-    .search-input {
+    .search-form {
       display: none;
     }
 
+    .search-form-mobile {
+      display: -webkit-flex;
+    }
+    
     .search-input-mobile {
-      display: block;
       width: 100%;
     }
     
