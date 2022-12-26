@@ -35,7 +35,7 @@ function Nav() {
                 <ul className='nav-left'>
                     <img src={logoImg} alt="logo" className="logo" style={{cursor: "pointer"}}
                          onClick={() => window.location.href = "/musicals"}/>
-                    <form className={"search-form"}>
+                    <form className={"search-form"} onSubmit={() => navigate("/musicals")}>
                         <input id={"search-input"} type={"text"} name={"keyword"} value={searchValue}
                                onChange={(e) => setSearchValue(e.target.value)}/>
                         <button type={"submit"} className={"search-btn"}>
