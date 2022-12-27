@@ -174,7 +174,7 @@ export const DetailPageStyle = styled.div`
       background-color: #fff;
       width: 100%;
       position: fixed;
-      bottom: 0;
+      bottom: 40px;
     }
     
     .mobile-reservation-btn {

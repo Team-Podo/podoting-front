@@ -31,6 +31,12 @@ function Nav() {
 
     return <>
         <NavWrapper>
+            <div className={"nav-mobile"}>
+                <div></div>
+                <img className={"nav-mobile-bar"} src={"http://temp20.zsol.co.kr/icon_img/home03.svg"} alt={"홈"} onClick={() => window.location.href = "/musicals"}/>
+                <img className={"nav-mobile-profile"} src={"http://temp20.zsol.co.kr/icon_img/member23.svg"}
+                     alt={"내 정보"} onClick={() => token ? navigate("/orders") : navigate("/login")} />
+            </div>
             <div className='nav-inner inner'>
                 <ul className='nav-left'>
                     <img src={logoImg} alt="logo" className="logo" style={{cursor: "pointer"}}

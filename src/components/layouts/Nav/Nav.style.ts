@@ -98,6 +98,29 @@ export const NavWrapper = styled.nav`
     .pc {
       display: none;
     }
+    
+    .nav-mobile {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      display: -webkit-flex;
+      -webkit-justify-content: space-between;
+      -webkit-align-items: center;
+      width: 100%;
+      z-index: 1001;
+      background-color: #BDBDBD;
+      padding: 5px 10px;
+    }
+    
+    .nav-mobile img {
+      color: #f0f0f0;
+      width: 30px;
+      height: 30px;
+    }
+    
+    .nav-mobile-bar {
+      width: 30px;
+    }
   }
 
 `

@@ -21,6 +21,9 @@ function ReservationBoxMobile({performanceID, schedules, details, onChange}: Res
     const navigate = useNavigate()
 
     useEffect(() => {
+        if (!getToken()) {
+            navigate("/login");
+        }
         if (schedules) {
             const [year, month, date] = schedules[0].date.split("-")
             setDate(new Date(Number(year), Number(month) - 1, Number(date)))
@@ -49,19 +52,13 @@ function ReservationBoxMobile({performanceID, schedules, details, onChange}: Res
         }
     }
 
-    function onClickOpenResWindow(e: React.MouseEvent<HTMLButtonElement>) {
+    function onClickNavigateToRes(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault()
         if (!getToken()) {
             navigate("/login");
             return false;
         }
-        const reservationProps = {
-            performanceId: performanceID,
-            scheduleUUID: activeScheduleUUID,
-            details: details
-        }
-        localStorage.setItem("reservationProps", JSON.stringify(reservationProps))
-        window.open("/res", "podoting - 예매", 'width=1028,height=618,location=no,status=no,scrollbars=yes')
+        navigate(`/res`)
     }
 
     function onChangeStatus() {
@@ -87,7 +84,7 @@ function ReservationBoxMobile({performanceID, schedules, details, onChange}: Res
                 </div>
                 {
                     schedules ?
-                        <button className="button" onClick={() => navigate(`/res`)}>예매하기</button> :
+                        <button className="button" onClick={onClickNavigateToRes}>예매하기</button> :
                         <button className="button btn-disabled" disabled={true}>예매종료</button>
                 }
             </div>

@@ -33,7 +33,7 @@ function OrderPage() {
     }
 
     return <OrderPageStyle className={"container"}>
-        <h2 className={"title"}>MY 티켓</h2>
+        <h2 className={"title pc"}>MY 티켓</h2>
         {
             orders.length > 0 ? orders.map((o) => <div key={o.id} className={"single-order"}>
                 <p className={"order-perf-title"}>{o.performance.title}</p>
