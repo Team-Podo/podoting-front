@@ -70,6 +70,10 @@ export const NavWrapper = styled.nav`
     margin: 0 10px;
   }
 
+
+  .nav-mobile {
+    display: none;
+  }
   @media(max-width: 84rem) {
     width: fit-content;
   }
