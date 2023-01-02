@@ -2,10 +2,12 @@ import {NavWrapper} from "./Nav.style";
 import logoImg from "../../../assets/images/Frame.svg"
 import {logout} from "../../../apis/auth";
 import {getToken} from "../../../utils/token";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useAlarm} from "../../../hooks/useAlarm";
 import searchImg from "../../../assets/images/search.png"
+import homeImg from "../../../assets/images/home.svg"
+import memberImg from "../../../assets/images/member.svg"
 
 function Nav() {
     const navigate = useNavigate()
@@ -33,8 +35,8 @@ function Nav() {
         <NavWrapper>
             <div className={"nav-mobile"}>
                 <div></div>
-                <img className={"nav-mobile-bar"} src={"http://temp20.zsol.co.kr/icon_img/home03.svg"} alt={"홈"} onClick={() => window.location.href = "/musicals"}/>
-                <img className={"nav-mobile-profile"} src={"http://temp20.zsol.co.kr/icon_img/member23.svg"}
+                <img className={"nav-mobile-bar"} src={homeImg} alt={"홈"} onClick={() => window.location.href = "/musicals"}/>
+                <img className={"nav-mobile-profile"} src={memberImg}
                      alt={"내 정보"} onClick={() => token ? navigate("/orders") : navigate("/login")} />
             </div>
             <div className='nav-inner inner'>
